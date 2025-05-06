@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffe0f0, #d0e8ff);
+}
+
+/* 進捗表示 */
+#progress {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+  z-index: 20;
+}
+
+/* 正解した文字の累積 */
+#correct-letters {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  z-index: 19;
+  max-width: 90vw;
+  word-break: break-word;
+}
+
+/* 録音ボタン */
+#audio-controls {
+  position: absolute;
+  top: 140px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 90vw;
+  z-index: 18;
+}
+
+#audio-controls button {
+  font-size: 1rem;
+  padding: 6px 10px;
+  width: auto;
+  max-width: 240px;
+}
+
+/* 録音ボタン下の説明文 */
+.record-description {
+  font-size: 0.9rem;
+  color: #444;
+  margin-left: 4px;
+  max-width: 280px;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* 録音中のステータス */
+#recording-status {
+  font-size: 1rem;
+  color: red;
+}
+
+/* メイン中央コンテンツ */
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  text-align: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* アルファベット表示 */
+#letter {
+  font-size: 18rem;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+  line-height: 1;
+  margin-bottom: 2rem;
+  margin-top: -2rem;
+}
+
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* キャラクターと吹き出し */
+#character-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: -40px;
+  flex-wrap: wrap;
+}
+
+#character {
+  width: clamp(120px, 20vw, 200px);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 吹き出し */
+#speech-bubble {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  position: relative;
+  max-width: 70vw;
+  flex-shrink: 1;
+}
+
+#speech-bubble::after {
+  content: "";
+  position: absolute;
+  left: -12px; /* ← ここは変更しない */
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 12px 12px 12px 0;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
+
+
+/* メッセージ（正解・不正解） */
+#message {
+  font-size: 2rem;
+  color: #333;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* 星アニメーション */
+.star {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: fly 1s ease-out forwards;
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x, 0px), var(--y, 0px)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* コンプリートメッセージ */
+#congrats {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  font-weight: bold;
+  color: gold;
+  text-shadow:
+    0 0 10px gold,
+    0 0 20px orange,
+    0 0 30px red;
+  background: linear-gradient(to right, gold, orange, gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  animation: fadeInUp 2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translate(-50%, 30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+/* 小さい画面対応 */
+@media (max-width: 768px), (max-height: 600px) {
+  #letter {
+    font-size: 18rem; /* 👈 アルファベットをさらに大きく */
+    margin-top: -1rem;
+  }
+
+  #character-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: -40px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+  
+
+  #speech-bubble {
+    font-size: 0.9rem;
+    max-width: 70vw;
+  }
+
+  #message {
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+  }
+
+  #correct-letters {
+    font-size: 1.5rem;
+    word-break: break-word;
+    max-width: 80vw;
+  }
+  
+  #character {
+    width: clamp(80px, 15vw, 140px); /* 👈 くまをさらに小さく */
+  }
+
+  #progress {
+    font-size: 1.5rem;
+  }
+}

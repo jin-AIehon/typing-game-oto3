@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ゴージャスABCタイピング</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="progress">1 / 26</div>
+  <div id="correct-letters"></div>
+
+  <div id="audio-controls">
+    <button id="record-correct-btn">🎤 正解ボイス録音</button>
+    <div class="record-description">
+      ①ボタンを押す<br>
+      ②「せいかい」としゃべる<br>
+      ③もう一度押す</div>
+    <button id="record-wrong-btn">❌ 不正解ボイス録音</button>
+    <div class="record-description">
+      ④ボタンを押す<br>
+      ⑤「ちがうよー」としゃべる<br>
+      ⑥もう一度押す</div>
+    <span id="recording-status"></span>
+  </div>
+
+  <div id="container">
+    <div id="letter">A</div>
+    <div id="character-container">
+      <img id="character" src="images/img1.png" alt="キャラ">
+      <div id="speech-bubble">がんばってね！</div>
+    </div>
+    <div id="message"></div>
+    <div id="congrats"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
