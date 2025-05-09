@@ -33,7 +33,7 @@ body {
 /* 録音ボタン */
 #audio-controls {
   position: absolute;
-  top: 200px;
+  top: 180px;
   left: 20px;
   display: flex;
   flex-direction: column;
